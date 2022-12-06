@@ -3,10 +3,10 @@
 
 struct ContainerItem {
 	ContainerItem(TRAIN item, ContainerItem* next);
-	setItem(TRAIN item);
-	getItem();
-	setNext(ContainerItem* next);
-	getNext();
+	void setItem(TRAIN item);
+	TRAIN getItem();
+	void setNext(ContainerItem* next);
+	ContainerItem* getNext();
 private:
 	TRAIN item;
 	ContainerItem* next;
