@@ -5,14 +5,14 @@ using namespace std;
 
 class TRAIN {
 public:
-	setDestination(string newDestination);
-	getDestination();
-	setNumber(string newNumber);
-	getNumber();
-	setTime(string newTime);
-	getTime();
-	istream& operator>>(istream& is, TRAIN& train);
-	ostream& operator<<(istream& os, TRAIN const& train);
+	void setDestination(string newDestination);
+	string getDestination();
+	void setNumber(string newNumber);
+	string getNumber();
+	void setTime(string newTime);
+	string getTime();
+	friend istream& operator>>(istream& is, TRAIN& train);
+	friend ostream& operator<<(ostream& os, TRAIN const& train);
 private:
 	string destination;
 	string number;

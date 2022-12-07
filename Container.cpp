@@ -35,27 +35,81 @@ void Container::add(TRAIN train) {
 }
 
 void Container::editTrain(size_t num, string param, string new_value) {
-	ContainerItem* now = first;
+	if (first != nullptr && num != 0) {
+		ContainerItem* now = first;
 
-	for (size_t i = 1; i < num; ++i) {
-		now = now->getNext();
-	}
+		for (size_t i = 1; i < num; ++i) {
+			now = now->getNext();
+		}
 
-	if (param == "пункт" || param == "destination") {
-		(now->getItem()).setDestination(new_value);
-	}
-	else if (param == "номер" || param == "number") {
-		(now->getItem()).setNumber(new_value);
-	}
-	else if (param == "время" || param == "time") {
-		(now->getItem()).setTime(new_value);
+		if (param == "пункт" || param == "destination") {
+			(now->getItem()).setDestination(new_value);
+		}
+		else if (param == "номер" || param == "number") {
+			(now->getItem()).setNumber(new_value);
+		}
+		else if (param == "время" || param == "time") {
+			(now->getItem()).setTime(new_value);
+		}
 	}
 }
 
 void Container::deleteTrain(size_t num) {
-	if (first != nullptr) {
+	if (first != nullptr && num != 0) {
 		ContainerItem* now = first;
 		ContainerItem* del_item = first->getNext();
+
+		if (num == 1) {
+			first = first->getNext();
+			delete now;
+		}
 		
+		else {
+			while (num > 2) {
+				if (del_item == nullptr) {
+					break;
+				}
+				now = now->getNext();
+				del_item = del_item->getNext();
+				--num;
+			}
+
+			if (del_item != nullptr) {
+				now->setNext(del_item->getNext());
+				delete del_item;
+			}
+		}
 	}
+}
+
+bool Container::departureAfter(string time) {
+	ContainerItem* now = first;
+	bool no_one = true;
+	while (now != nullptr) {
+		if ((now->getItem()).getTime() > time) {
+			no_one = false;
+			cout << now->getItem();
+		}
+		now = now->getNext();
+	}
+	
+	return no_one;
+}
+
+void Container::show() {
+	ContainerItem* now = first;
+	while (now != nullptr) {
+		cout << now->getItem();
+		now = now->getNext();
+	}
+}
+
+Container::~Container() {
+	ContainerItem* temp;
+	while (first != nullptr) {
+		temp = first;
+		first = first->getNext();
+		delete temp;
+	}
+	cout << "Вызван деструктор класса Container" << endl;
 }
