@@ -32,13 +32,16 @@ void Container::add(TRAIN train) {
 			}
 		}
 	}
+	else {
+		first = new ContainerItem(train, nullptr);
+	}
 }
 
 void Container::editTrain(size_t num, string param, string new_value) {
 	if (first != nullptr && num != 0) {
 		ContainerItem* now = first;
 
-		for (size_t i = 1; i < num; ++i) {
+		for (size_t i = 1; i < num && now != nullptr; ++i) {
 			now = now->getNext();
 		}
 
@@ -88,7 +91,7 @@ bool Container::departureAfter(string time) {
 	while (now != nullptr) {
 		if ((now->getItem()).getTime() > time) {
 			no_one = false;
-			cout << now->getItem();
+			cout << now->getItem() << endl;
 		}
 		now = now->getNext();
 	}
@@ -99,7 +102,7 @@ bool Container::departureAfter(string time) {
 void Container::show() {
 	ContainerItem* now = first;
 	while (now != nullptr) {
-		cout << now->getItem();
+		cout << now->getItem() << endl;
 		now = now->getNext();
 	}
 }

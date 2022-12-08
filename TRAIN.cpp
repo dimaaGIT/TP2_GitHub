@@ -26,11 +26,11 @@ string TRAIN::getTime() {
 
 istream& operator>>(istream& is, TRAIN& train) {
 	cout << "Введите пункт назначения: ";
-	is >> train.destination;
+	getline(is, train.destination);
 	cout << "Введите номер поезда: ";
-	is >> train.number;
+	getline(is, train.number);
 	cout << "Введите время отправления: ";
-	is >> train.time;
+	getline(is, train.time);
 	return is;
 }
 
@@ -38,4 +38,5 @@ ostream& operator<<(ostream& os, TRAIN const& train) {
 	os << "Пункт назначения: " << train.destination << endl 
 	   << "Номер поезда: " << train.number << endl
 	   << "Время отправления: " << train.time << endl;
+	return os;
 }

@@ -10,7 +10,7 @@ void ContainerItem::setItem(TRAIN item) {
 	this->item = item;
 }
 
-TRAIN ContainerItem::getItem() {
+TRAIN& ContainerItem::getItem() {
 	return this->item;
 }
 
